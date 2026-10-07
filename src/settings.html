@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>Island — настройки</title>
+  <link rel="stylesheet" href="settings.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="preview"><div class="pill" id="preview-pill"></div></div>
+    <div>
+      <h1>Island</h1>
+      <p class="muted">Версия 0.1.0</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="group">
+      <label class="row">
+        <span class="text">
+          <span class="name">Запускать вместе с Windows</span>
+          <span class="desc">Остров появится сразу после входа в систему</span>
+        </span>
+        <input type="checkbox" class="switch" data-key="autostart" />
+      </label>
+    </section>
+
+    <section class="group">
+      <div class="row">
+        <span class="text">
+          <span class="name">Раскрывать остров</span>
+        </span>
+        <div class="segmented" role="radiogroup" data-key="expandOnHover">
+          <button data-value="true" role="radio">При наведении</button>
+          <button data-value="false" role="radio">По клику</button>
+        </div>
+      </div>
+      <label class="row">
+        <span class="text">
+          <span class="name">Отступ сверху</span>
+          <span class="desc" id="offset-value">8 px</span>
+        </span>
+        <input type="range" min="0" max="48" step="1" data-key="topOffset" />
+      </label>
+      <label class="row">
+        <span class="text">
+          <span class="name">Прятать в полноэкранном режиме</span>
+          <span class="desc">Во время игр, видео и презентаций</span>
+        </span>
+        <input type="checkbox" class="switch" data-key="hideInFullscreen" />
+      </label>
+    </section>
+
+    <section class="group">
+      <label class="row">
+        <span class="text">
+          <span class="name">Показывать подключение зарядки</span>
+          <span class="desc">Остров ненадолго раскроется с уровнем заряда</span>
+        </span>
+        <input type="checkbox" class="switch" data-key="chargingActivity" />
+      </label>
+      <label class="row">
+        <span class="text">
+          <span class="name">Звук таймера</span>
+        </span>
+        <input type="checkbox" class="switch" data-key="timerSound" />
+      </label>
+    </section>
+
+    <section class="group">
+      <label class="row">
+        <span class="text">
+          <span class="name">Показывать громкость и яркость</span>
+          <span class="desc">Яркость — только для встроенного экрана ноутбука</span>
+        </span>
+        <input type="checkbox" class="switch" data-key="osd" />
+      </label>
+      <label class="row" id="row-hide-system">
+        <span class="text">
+          <span class="name">Прятать индикатор громкости Windows</span>
+          <span class="desc">Чтобы не было двух индикаторов сразу. Неофициальный способ — после обновления Windows может перестать работать</span>
+        </span>
+        <input type="checkbox" class="switch" data-key="hideSystemOsd" />
+      </label>
+      <label class="row">
+        <span class="text">
+          <span class="name">Громкость колесом мыши</span>
+          <span class="desc">Прокрутка над свёрнутым островом</span>
+        </span>
+        <input type="checkbox" class="switch" data-key="scrollVolume" />
+      </label>
+    </section>
+
+    <section class="group">
+      <div class="row">
+        <span class="text">
+          <span class="name">Значки файлов на полке</span>
+          <span class="desc">Миниатюры и значки из Проводника</span>
+        </span>
+        <div class="segmented" role="radiogroup" data-key="fileIcons">
+          <button data-value="system" role="radio">Как в Windows</button>
+          <button data-value="simple" role="radio">Простые</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="group">
+      <label class="row">
+        <span class="text">
+          <span class="name">История буфера обмена</span>
+          <span class="desc">Хранится только до перезапуска. Пароли из менеджеров паролей не сохраняются</span>
+        </span>
+        <input type="checkbox" class="switch" data-key="clipboardHistory" />
+      </label>
+      <label class="row">
+        <span class="text">
+          <span class="name">Показывать «Скопировано»</span>
+          <span class="desc">Остров коротко отмечает каждое копирование</span>
+        </span>
+        <input type="checkbox" class="switch" data-key="clipboardFlash" />
+      </label>
+    </section>
+
+    <p class="hint muted">Правый клик по острову тоже открывает это окно.</p>
+  </main>
+
+  <footer>
+    <span class="status" id="status" role="status"></span>
+    <button class="danger" id="quit">Выйти из Island</button>
+  </footer>
+
+  <script src="settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+# Сборка Island на настоящей Windows и прогон UI-тестов.
+# Запускается при каждом push, а также вручную: вкладка Actions → build → Run workflow.
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  ui-tests:
+    name: Тесты интерфейса (Chromium)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Установка Playwright
+        run: |
+          pip install playwright pillow
+          python -m playwright install --with-deps chromium
+      - name: Тесты
+        run: python tests/test_ui.py
+      - name: Скриншоты состояний
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-screenshots
+          path: tests/shots
+
+  windows:
+    name: Сборка под Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Кэш сборки
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      # Быстрая проверка: ошибки компиляции видны здесь за пару минут
+      - name: cargo check
+        working-directory: src-tauri
+        run: cargo check --color always
+
+      - name: Сборка установщика
+        run: npx --yes @tauri-apps/cli@2 build
+
+      - name: Установщик
+        uses: actions/upload-artifact@v4
+        with:
+          name: Island-setup
+          path: src-tauri/target/release/bundle/nsis/*.exe

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>Island</title>
+  <link rel="stylesheet" href="island.css" />
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-note" viewBox="0 0 24 24"><path fill="currentColor" d="M9 18.5a3 3 0 1 1-2-2.83V5.6a1 1 0 0 1 .76-.97l10-2.5A1 1 0 0 1 19 3.1v12.4a3 3 0 1 1-2-2.83V7.28l-8 2V18.5Z"/></symbol>
+      <symbol id="i-timer" viewBox="0 0 24 24"><path fill="currentColor" d="M6 2h12a1 1 0 1 1 0 2h-1v2.6a5 5 0 0 1-2.2 4.15L13.7 12l1.1.75A5 5 0 0 1 17 16.9V20h1a1 1 0 1 1 0 2H6a1 1 0 1 1 0-2h1v-3.1a5 5 0 0 1 2.2-4.15L10.3 12l-1.1-.75A5 5 0 0 1 7 7.1V4H6a1 1 0 0 1 0-2Zm3 2v3.1a3 3 0 0 0 1.32 2.49l2.24 1.53a1 1 0 0 1 0 1.65l-2.24 1.53A3 3 0 0 0 9 16.9V20h6v-3.1a3 3 0 0 0-1.32-2.49l-2.24-1.53a1 1 0 0 1 0-1.65l2.24-1.53A3 3 0 0 0 15 6.9V4H9Zm1.5 14.5c0-1 .7-1.8 1.5-2.3.8.5 1.5 1.3 1.5 2.3h-3Z"/></symbol>
+      <symbol id="i-watch" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4.5a8.5 8.5 0 1 1 0 17 8.5 8.5 0 0 1 0-17Zm0 2a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM12 8a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V9a1 1 0 0 1 1-1ZM9.5 1h5a1 1 0 1 1 0 2h-5a1 1 0 0 1 0-2Z"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4.9v14.2a1 1 0 0 0 1.52.85l11.4-7.1a1 1 0 0 0 0-1.7L8.52 4.05A1 1 0 0 0 7 4.9Z"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="4.5" width="4" height="15" rx="1.2" fill="currentColor"/><rect x="14" y="4.5" width="4" height="15" rx="1.2" fill="currentColor"/></symbol>
+      <symbol id="i-prev" viewBox="0 0 24 24"><path fill="currentColor" d="M5 5a1 1 0 0 1 2 0v5.4l9.5-5.9A1 1 0 0 1 18 5.35v13.3a1 1 0 0 1-1.5.85L7 13.6V19a1 1 0 1 1-2 0V5Z"/></symbol>
+      <symbol id="i-next" viewBox="0 0 24 24"><path fill="currentColor" d="M19 5a1 1 0 1 0-2 0v5.4L7.5 4.5A1 1 0 0 0 6 5.35v13.3a1 1 0 0 0 1.5.85l9.5-5.9V19a1 1 0 1 0 2 0V5Z"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path fill="currentColor" d="M6.3 6.3a1 1 0 0 1 1.4 0L12 10.6l4.3-4.3a1 1 0 1 1 1.4 1.4L13.4 12l4.3 4.3a1 1 0 0 1-1.4 1.4L12 13.4l-4.3 4.3a1 1 0 0 1-1.4-1.4l4.3-4.3-4.3-4.3a1 1 0 0 1 0-1.4Z"/></symbol>
+      <symbol id="i-bolt" viewBox="0 0 24 24"><path fill="currentColor" d="M13.5 2 5 13.5h5.5L9.5 22 19 9.5h-5.5L13.5 2Z"/></symbol>
+      <symbol id="i-gear" viewBox="0 0 24 24"><path fill="currentColor" d="M10.3 2h3.4l.55 2.7c.6.23 1.16.55 1.67.94l2.6-.88 1.7 2.94-2.06 1.83a6.9 6.9 0 0 1 0 1.94l2.06 1.83-1.7 2.94-2.6-.88c-.51.39-1.07.71-1.67.94L13.7 22h-3.4l-.55-2.7a7 7 0 0 1-1.67-.94l-2.6.88-1.7-2.94 2.06-1.83a6.9 6.9 0 0 1 0-1.94L3.78 9.7l1.7-2.94 2.6.88c.51-.39 1.07-.71 1.67-.94L10.3 2ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></symbol>
+      <symbol id="i-clip" viewBox="0 0 24 24"><path fill="currentColor" d="M9 2.5h6a1.5 1.5 0 0 1 1.5 1.5h1A2.5 2.5 0 0 1 20 6.5v13a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 19.5v-13A2.5 2.5 0 0 1 6.5 4h1A1.5 1.5 0 0 1 9 2.5ZM7.5 6h-1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-13a.5.5 0 0 0-.5-.5h-1A1.5 1.5 0 0 1 15 7.5H9A1.5 1.5 0 0 1 7.5 6Zm2-1.5v1h5v-1h-5ZM8.5 11h7a1 1 0 1 1 0 2h-7a1 1 0 1 1 0-2Zm0 4h4a1 1 0 1 1 0 2h-4a1 1 0 1 1 0-2Z"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path fill="currentColor" d="M14.6 2.6a1 1 0 0 1 1.4 0l5.4 5.4a1 1 0 0 1 0 1.4l-1.2 1.2a1 1 0 0 1-1 .25l-3.4 3.4.3 3.1a1 1 0 0 1-.3.8l-1 1a1 1 0 0 1-1.4 0L9.7 15.4l-5 5a1 1 0 0 1-1.4-1.4l5-5-3.7-3.7a1 1 0 0 1 0-1.4l1-1a1 1 0 0 1 .8-.3l3.1.3 3.4-3.4a1 1 0 0 1 .25-1l1.4-1.1Z"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24"><path fill="currentColor" d="M10 2.5h4a2 2 0 0 1 2 2V5h3.5a1 1 0 1 1 0 2h-.6l-.85 12.2A3 3 0 0 1 15.06 22H8.94a3 3 0 0 1-2.99-2.8L5.1 7h-.6a1 1 0 0 1 0-2H8v-.5a2 2 0 0 1 2-2Zm0 2.5h4v-.5h-4V5ZM7.1 7l.84 12.06a1 1 0 0 0 1 .94h6.12a1 1 0 0 0 1-.94L16.9 7H7.1Z"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path fill="currentColor" d="M20.7 5.8a1 1 0 0 1 0 1.4l-10.5 10.5a1 1 0 0 1-1.4 0l-5.5-5.5a1 1 0 1 1 1.4-1.4l4.8 4.8 9.8-9.8a1 1 0 0 1 1.4 0Z"/></symbol>
+      <symbol id="i-tray" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 3.5h10.8a2.5 2.5 0 0 1 2.3 1.5l2.1 5a2.5 2.5 0 0 1 .2 1V18a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 18v-7a2.5 2.5 0 0 1 .2-1l2.1-5a2.5 2.5 0 0 1 2.3-1.5Zm0 2a.5.5 0 0 0-.46.3L4.3 10.5H8a1 1 0 0 1 .95.68L9.7 13.5h4.6l.75-2.32A1 1 0 0 1 16 10.5h3.7l-1.84-4.7a.5.5 0 0 0-.46-.3H6.6ZM20 12.5h-3.27l-.78 2.32a1 1 0 0 1-.95.68H9a1 1 0 0 1-.95-.68l-.78-2.32H4V18a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5v-5.5Z"/></symbol>
+      <symbol id="i-folder" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 4h4.6a2 2 0 0 1 1.42.59L12.4 6.5h7.1A2.5 2.5 0 0 1 22 9v8.5a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 17.5v-11A2.5 2.5 0 0 1 4.5 4Z"/></symbol>
+      <symbol id="i-reveal" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 4h4.6a2 2 0 0 1 1.42.59L12.4 6.5h7.1A2.5 2.5 0 0 1 22 9v8.5a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 17.5v-11A2.5 2.5 0 0 1 4.5 4Zm0 2a.5.5 0 0 0-.5.5v11a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5V9a.5.5 0 0 0-.5-.5H12a1 1 0 0 1-.7-.3L9.1 6H4.5Z"/></symbol>
+      <symbol id="i-speaker" viewBox="0 0 24 24"><path fill="currentColor" d="M11.4 4.2a1 1 0 0 1 1.6.8v14a1 1 0 0 1-1.6.8L7 16.5H4.5A1.5 1.5 0 0 1 3 15V9a1.5 1.5 0 0 1 1.5-1.5H7l4.4-3.3Zm4.5 3.1a1 1 0 0 1 1.4.1 7 7 0 0 1 0 9.2 1 1 0 1 1-1.5-1.3 5 5 0 0 0 0-6.6 1 1 0 0 1 .1-1.4Zm2.9-2.6a1 1 0 0 1 1.4.1 11 11 0 0 1 0 14.4 1 1 0 0 1-1.5-1.3 9 9 0 0 0 0-11.8 1 1 0 0 1 .1-1.4Z"/></symbol>
+      <symbol id="i-speaker-low" viewBox="0 0 24 24"><path fill="currentColor" d="M11.4 4.2a1 1 0 0 1 1.6.8v14a1 1 0 0 1-1.6.8L7 16.5H4.5A1.5 1.5 0 0 1 3 15V9a1.5 1.5 0 0 1 1.5-1.5H7l4.4-3.3Zm4.5 3.1a1 1 0 0 1 1.4.1 7 7 0 0 1 0 9.2 1 1 0 1 1-1.5-1.3 5 5 0 0 0 0-6.6 1 1 0 0 1 .1-1.4Z"/></symbol>
+      <symbol id="i-speaker-off" viewBox="0 0 24 24"><path fill="currentColor" d="M11.4 4.2a1 1 0 0 1 1.6.8v14a1 1 0 0 1-1.6.8L7 16.5H4.5A1.5 1.5 0 0 1 3 15V9a1.5 1.5 0 0 1 1.5-1.5H7l4.4-3.3Zm4.9 4.1a1 1 0 0 1 1.4 0l1.3 1.3 1.3-1.3a1 1 0 1 1 1.4 1.4L20.4 11l1.3 1.3a1 1 0 0 1-1.4 1.4L19 12.4l-1.3 1.3a1 1 0 0 1-1.4-1.4l1.3-1.3-1.3-1.3a1 1 0 0 1 0-1.4Z"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><path fill="currentColor" d="M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0-6a1 1 0 0 1 1 1v1.5a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1Zm0 18.5a1 1 0 0 1 1 1V22a1 1 0 1 1-2 0v-1.5a1 1 0 0 1 1-1ZM23 12a1 1 0 0 1-1 1h-1.5a1 1 0 1 1 0-2H22a1 1 0 0 1 1 1ZM4.5 12a1 1 0 0 1-1 1H2a1 1 0 1 1 0-2h1.5a1 1 0 0 1 1 1Zm14.3-7.8a1 1 0 0 1 0 1.4l-1 1a1 1 0 1 1-1.4-1.4l1-1a1 1 0 0 1 1.4 0ZM7.6 16.4a1 1 0 0 1 0 1.4l-1 1a1 1 0 1 1-1.4-1.4l1-1a1 1 0 0 1 1.4 0Zm11.2 2.4a1 1 0 0 1-1.4 0l-1-1a1 1 0 0 1 1.4-1.4l1 1a1 1 0 0 1 0 1.4ZM7.6 7.6a1 1 0 0 1-1.4 0l-1-1a1 1 0 0 1 1.4-1.4l1 1a1 1 0 0 1 0 1.4Z"/></symbol>
+    </defs>
+  </svg>
+
+  <div id="island" class="s-compact" role="region" aria-label="Island">
+    <!-- компактная «живая активность»: слева значок, справа значение -->
+    <div class="layer" data-layer="activity">
+      <div class="slot left" id="act-left"></div>
+      <div class="slot right" id="act-right"></div>
+    </div>
+
+    <!-- раскрытый вид -->
+    <div class="layer" data-layer="expanded">
+      <header class="bar">
+        <nav class="tabs" role="tablist">
+          <button class="tab" data-tab="music" role="tab" title="Музыка"><svg><use href="#i-note"/></svg></button>
+          <button class="tab" data-tab="timer" role="tab" title="Таймер"><svg><use href="#i-timer"/></svg></button>
+          <button class="tab" data-tab="stopwatch" role="tab" title="Секундомер"><svg><use href="#i-watch"/></svg></button>
+          <button class="tab" data-tab="clipboard" role="tab" title="Буфер обмена"><svg><use href="#i-clip"/></svg></button>
+          <button class="tab" data-tab="files" role="tab" title="Файлы"><svg><use href="#i-tray"/></svg></button>
+        </nav>
+        <div class="bar-right">
+          <button class="text-btn" id="tab-clear" hidden>Очистить</button>
+          <span class="battery-mini" id="battery-mini" hidden>
+            <span class="batt"><span class="batt-fill"></span></span>
+            <span class="batt-text"></span>
+          </span>
+          <button class="icon-btn" id="open-settings" title="Настройки"><svg><use href="#i-gear"/></svg></button>
+        </div>
+      </header>
+
+      <section class="panel" data-panel="music">
+        <div class="m-top">
+          <div class="art" id="m-art">
+            <svg class="art-ph"><use href="#i-note"/></svg>
+            <img id="m-img" alt="" hidden />
+          </div>
+          <div class="track" id="m-track">
+            <div class="title" id="m-title">Ничего не играет</div>
+            <div class="artist" id="m-artist">Включите музыку в любом плеере</div>
+            <div class="app" id="m-app"></div>
+          </div>
+          <div class="eq" id="m-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="m-bottom" id="m-bottom">
+          <span class="time" id="m-pos">0:00</span>
+          <div class="progress" id="m-progress" title="Перемотать"><span id="m-bar"></span></div>
+          <span class="time right" id="m-left">0:00</span>
+          <div class="controls">
+            <button class="ctl" id="m-prev" title="Предыдущий"><svg><use href="#i-prev"/></svg></button>
+            <button class="ctl big" id="m-play" title="Пауза / воспроизведение"><svg><use id="m-play-ico" href="#i-play"/></svg></button>
+            <button class="ctl" id="m-next" title="Следующий"><svg><use href="#i-next"/></svg></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" data-panel="timer">
+        <div class="timer-setup" id="timer-setup">
+          <div class="presets">
+            <button class="chip" data-min="1">1 мин</button>
+            <button class="chip" data-min="5">5 мин</button>
+            <button class="chip" data-min="10">10 мин</button>
+            <button class="chip" data-min="25">25 мин</button>
+          </div>
+          <div class="adjust">
+            <button class="round" id="t-minus" title="Минус минута">−</button>
+            <div class="big-time" id="t-setup-time">05:00</div>
+            <button class="round" id="t-plus" title="Плюс минута">+</button>
+          </div>
+        </div>
+        <div class="timer-run" id="timer-run" hidden>
+          <svg class="ring" viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" class="ring-bg"/><circle cx="22" cy="22" r="19" class="ring-fg" id="t-ring"/></svg>
+          <div class="big-time orange" id="t-run-time">00:00</div>
+        </div>
+        <div class="actions">
+          <button class="pill grey" id="t-cancel" hidden>Отмена</button>
+          <button class="pill orange" id="t-main">Старт</button>
+        </div>
+      </section>
+
+      <section class="panel" data-panel="stopwatch">
+        <div class="sw-display">
+          <div class="big-time" id="sw-time">00:00,00</div>
+          <div class="lap" id="sw-lap"></div>
+        </div>
+        <div class="actions">
+          <button class="pill grey" id="sw-secondary">Сброс</button>
+          <button class="pill green" id="sw-main">Старт</button>
+        </div>
+      </section>
+
+      <section class="panel" data-panel="clipboard">
+        <div class="clip-list" id="clip-list" role="list"></div>
+        <div class="clip-empty" id="clip-empty">
+          <svg><use href="#i-clip"/></svg>
+          <p>Скопируйте текст или картинку — они появятся здесь</p>
+        </div>
+      </section>
+
+      <section class="panel" data-panel="files">
+        <div class="shelf" id="shelf" role="list"></div>
+        <div class="clip-empty" id="shelf-empty">
+          <svg><use href="#i-tray"/></svg>
+          <p>Перетащите сюда файлы — они полежат здесь, пока не понадобятся. Потом их можно вытащить в любое окно</p>
+        </div>
+        <div class="drop-zone" id="drop-zone">
+          <svg><use href="#i-tray"/></svg>
+          <span>Отпустите, чтобы положить на полку</span>
+        </div>
+      </section>
+    </div>
+
+    <!-- громкость / яркость -->
+    <div class="layer" data-layer="osd">
+      <svg class="osd-ico" id="osd-ico"><use id="osd-ico-use" href="#i-speaker"/></svg>
+      <div class="osd-bar"><span id="osd-fill"></span></div>
+      <span class="osd-val" id="osd-val">0</span>
+    </div>
+
+    <!-- таймер закончился -->
+    <div class="layer" data-layer="alert">
+      <div class="alert-icon"><svg><use href="#i-timer"/></svg></div>
+      <div class="alert-text">
+        <div class="alert-title">Таймер</div>
+        <div class="alert-sub">Время вышло</div>
+      </div>
+      <button class="round orange-bg" id="alert-stop" title="Остановить"><svg><use href="#i-close"/></svg></button>
+    </div>
+  </div>
+
+  <script src="island.js"></script>
+</body>
+</html>
